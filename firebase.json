@@ -5,8 +5,8 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "**/ios/**",
-      "**/android/**"
+      "**/android/**",
+      "**/ios/**"
     ],
     "rewrites": [
       {
