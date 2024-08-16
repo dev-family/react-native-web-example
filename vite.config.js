@@ -13,7 +13,6 @@ export default defineConfig({
         plugins: [
           "react-native-reanimated/plugin",
           "@babel/plugin-proposal-class-properties",
-          "@babel/plugin-proposal-export-namespace-from",
         ],
       },
     }),
