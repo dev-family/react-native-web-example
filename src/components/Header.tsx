@@ -1,7 +1,7 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, Platform, StyleSheet, Text, View } from "react-native";
 import { config } from "../../config";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import React from "react";
+import React, { useEffect } from "react";
 
 type HeaderProps = {
   amount: number;
@@ -10,8 +10,13 @@ export const Header: React.FC<HeaderProps> = ({ amount }) => {
   const insets = useSafeAreaInsets();
   const paddingTop = Math.max(20, insets.top);
 
-  const { photo_url, username } = config().initDataUnsafe.user;
+  const { username, photo_url } = config().initDataUnsafe.user;
 
+  useEffect(() => {
+    if (Platform.OS === "web") {
+      alert(JSON.stringify(config().initDataUnsafe));
+    }
+  }, []);
   return (
     <View style={[styles.header, { paddingTop }]}>
       <View style={styles.amountRow}>
@@ -24,7 +29,11 @@ export const Header: React.FC<HeaderProps> = ({ amount }) => {
       <View style={styles.userInfo}>
         <Text style={styles.username}>@{username}</Text>
         {photo_url ? (
-          <Image style={styles.image} source={{ uri: photo_url }}></Image>
+          <Image
+            style={[styles.image, { backgroundColor: "transparent" }]}
+            source={{
+              uri: photo_url,
+            }}></Image>
         ) : (
           <View style={styles.image}>
             <Image

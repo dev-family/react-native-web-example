@@ -16,13 +16,11 @@ export const Progress: React.FC<ProgressProps> = ({ max = 3500, amount }) => {
       <Text style={[styles.text, { width }]}>
         {amount} / {max}
       </Text>
-      <Animated.View
-        layout={LinearTransition.easing(Easing.linear)}
-        style={[styles.progress, { width: (amount / max) * width }]}>
+      <View style={[styles.progress, { width: (amount / max) * width }]}>
         <Text style={[styles.text, styles.progressText, { width }]}>
           {amount} / {max}
         </Text>
-      </Animated.View>
+      </View>
     </View>
   );
 };

@@ -17,6 +17,7 @@ export const MockConfig = {
     subtitle_text_color: "",
     destructive_text_color: "",
   },
+  expand: () => {},
   initDataUnsafe: {
     user: {
       username: "MockUser",
