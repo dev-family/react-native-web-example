@@ -1,7 +1,7 @@
-import { Alert, Image, Platform, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { config } from "../../config";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import React, { useEffect } from "react";
+import React from "react";
 
 type HeaderProps = {
   amount: number;
