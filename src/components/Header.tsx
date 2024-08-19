@@ -12,11 +12,6 @@ export const Header: React.FC<HeaderProps> = ({ amount }) => {
 
   const { username, photo_url } = config().initDataUnsafe.user;
 
-  useEffect(() => {
-    if (Platform.OS === "web") {
-      alert(JSON.stringify(config().initDataUnsafe));
-    }
-  }, []);
   return (
     <View style={[styles.header, { paddingTop }]}>
       <View style={styles.amountRow}>

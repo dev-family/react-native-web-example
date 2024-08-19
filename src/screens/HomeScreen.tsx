@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet, View } from "react-native";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
 import { Coin, Header, Progress, Screen } from "../components";
 import { config } from "../../config";
 import { useState } from "react";
@@ -18,12 +18,16 @@ export const HomeScreen = () => {
     setClickedAmount(prev => prev + 1);
   };
 
+  const { themeParams, initDataUnsafe } = config();
   return (
     <>
       <StatusBar backgroundColor={config().themeParams.header_bg_color} />
       <Screen style={{ paddingBottom }}>
         <Header amount={amount} />
         <View style={styles.screen}>
+          <Text style={{ color: themeParams.text_color }}>
+            {JSON.stringify(initDataUnsafe.user)}
+          </Text>
           <View style={styles.coin}>
             <Coin
               disabled={clickedAmount >= MAX_CLICK_AMOUNT}
