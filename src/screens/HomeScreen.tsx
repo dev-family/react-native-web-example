@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 import { Coin, Header, Progress, Screen } from "../components";
 import { config } from "../../config";
 import { useState } from "react";
@@ -7,12 +7,15 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 const MAX_CLICK_AMOUNT = 3500;
 
 export const HomeScreen = () => {
+  //total amount of coins
   const [amount, setAmount] = useState(0);
+  //amount of clicks
   const [clickedAmount, setClickedAmount] = useState(0);
 
   const insets = useSafeAreaInsets();
   const paddingBottom = Math.max(20, insets.bottom);
 
+  //what happened when we press coin
   const handleClick = () => {
     setAmount(prev => prev + 1);
     setClickedAmount(prev => prev + 1);

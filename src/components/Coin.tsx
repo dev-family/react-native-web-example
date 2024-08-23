@@ -10,7 +10,6 @@ import {
   View,
 } from "react-native";
 import Animated, {
-  ReduceMotion,
   SlideOutUp,
   useAnimatedStyle,
   useSharedValue,
@@ -21,6 +20,7 @@ import { config } from "../../config";
 import { useHaptics } from "../useHaptics";
 import { ImpactFeedbackStyle } from "expo-haptics";
 
+//animated component to have ability use animated style from Reanimated package
 const AnimatedButton = Animated.createAnimatedComponent(Pressable);
 
 const sensitivity = Platform.OS == "web" ? 0.1 : 0.2;
@@ -29,6 +29,10 @@ const animationConfig = {
   duration: 100,
 };
 
+/**
+ * @prop onClick - what happened on click the coin
+ * @prop disabled - when coin can be clicked or not
+ */
 type CoinProps = {
   onClick: () => void;
   disabled?: boolean;
@@ -41,9 +45,11 @@ export const Coin: React.FC<CoinProps> = ({ disabled, onClick }) => {
   const [showNumber, setShowNumber] = useState(false);
 
   const width = Dimensions.get("window").width - 50;
+  //setting coin size based on window and check web compatibility
   const size = width > 1000 ? 1000 : width;
   const center = size / 2;
 
+  //shared values to use in coin animation
   const rotateX = useSharedValue(0);
   const rotateY = useSharedValue(0);
 
@@ -54,7 +60,9 @@ export const Coin: React.FC<CoinProps> = ({ disabled, onClick }) => {
 
     const { locationX, locationY } = e.nativeEvent;
 
+    //getting rotate amount by x axis
     const deltaX = locationX - center;
+    //getting rotate amount by y axis
     const deltaY = locationY - center;
 
     if (Platform.OS === "web") {
@@ -65,6 +73,7 @@ export const Coin: React.FC<CoinProps> = ({ disabled, onClick }) => {
       rotateX.value = withTiming(-deltaY * sensitivity, animationConfig);
     }
 
+    //set number position && unique id to have no problems with keys
     setNumber({ id: generateUuid(), x: locationX, y: locationY });
   };
 
@@ -79,12 +88,16 @@ export const Coin: React.FC<CoinProps> = ({ disabled, onClick }) => {
     }
 
     onClick();
+
+    // use timeout to not remove element on render start
     setTimeout(() => {
+      //set values undefined to launch exiting animation
       setNumber(undefined);
       setShowNumber(false);
     }, 10);
   };
 
+  //style to define coin rotation
   const rotateStyle = useAnimatedStyle(
     () => ({
       position: "relative",
@@ -135,6 +148,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 26,
     fontWeight: "600",
+    //getting text color from Telegram client
     color: config().themeParams?.hint_color,
   },
 });

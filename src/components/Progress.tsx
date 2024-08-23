@@ -1,14 +1,15 @@
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { config } from "../../config";
-import Animated, { Easing, LinearTransition } from "react-native-reanimated";
-import React, { useState } from "react";
 
 type ProgressProps = {
   max?: number;
   amount: number;
 };
+
 export const Progress: React.FC<ProgressProps> = ({ max = 3500, amount }) => {
   const [width, setWidth] = useState(0);
+
   return (
     <View
       style={styles.container}
